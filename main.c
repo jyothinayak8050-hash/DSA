@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-int gcd(int a, int b){
-  if(b==0)
-    return a;
-    return gcd(b,a%b);
-
+void TowerofHanoi(int n,char source,char dest,char temp){
+if (n>1){
+    TowerofHanoi(n-1,source,temp,dest);
+    printf("\n move %d disc from %c",n,source,dest);
+    TowerofHanoi(n-1,temp,dest,source);
+}
+else
+    printf("\n move %d disc from %c",n,source,dest);
 }
 int main(){
-int a,b,ans;
-printf("\n read two number:");
-scanf("%d%d",&a,&b);
-ans=gcd(a,b);
-printf("\n gcd of %d and %d is %d", a,b,ans);
+int n;
+printf("\n read number of disc:");
+scanf("%d",&n);
+TowerofHanoi(n,'S','D','T');
 return 0;
 }
+
