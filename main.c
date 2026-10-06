@@ -1,58 +1,72 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE 5
- struct stack{;
-int top;
-int data[SIZE]
+struct queue{
+int front,rear;
+int data[SIZE];
 };
-typedef struct stack STACK;
-void push(STACK *s,int iteam){
-if(s->top==SIZE-1)
-    printf("\nstack overflow");
-else{s->top=s->top+1;
-s->data[s->top]=iteam;
-}
-}
-void pop(STACK*s){
-if(s->top==-1)
-    printf("\n stack underflow");
-else
+typedef struct queue QUEUE;
+void enqueue(QUEUE *q,int item)
 {
-    printf("\n element poped is %d",s->data[s->top]);
-    s->top=s->top-1;
-}
-}
-void display(STACK s){
-int i;
-if(s.top==-1)
-    printf("\n stack is empty");
+    if(q->rear==SIZE-1)
+    printf("\n Queue full");
 else{
-    printf("\n contain of stack");
-    for(i=s.top; i>=0; i--)
-        printf("%d\n",s.data[i]);
+    q->rear=q->rear+1;
+    q->data[q->rear]=item;
+    if(q->front==-1)
+        q->front=0;
+
 }
+}
+void dequeue(QUEUE *q)
+ {
+    if(q->front==-1)
+    printf("\n Queue empty");
+
+ else{
+    printf("\n element is %d",q->data[q->front]);
+    if(q->front==q->rear){
+        q->front=-1;
+        q->rear=-1;
+    }
+    else{
+        q->front=q->front+1;
+    }
+}
+ }
+void display(QUEUE q){
+int i;
+if(q.front==-1)
+    printf("\n Queue is emty");
+    else{
+        printf("\n The containt of queue ara\n");
+        for(i=q.front; i<=q.rear;i++)
+            printf("%d\t",q.data[i]);
+
+    }
 }
 int main(){
-int item,ch;
-STACK s;
-s.top=-1;
-for(;;){
-    printf("\n 1.push");
-    printf("\n 2.pop");
-    printf("\n 3.display");
-    printf("\n 4.exit");
-    printf("\n read choice:");
-    scanf("%d",&ch);
-    switch(ch){
-    case 1: printf("\n read element to be push:");
+QUEUE q;
+q.front=-1;
+q.rear=-1;
+ int item,chr;
+ for(;;){
+    printf("\n 1. Insert");
+    printf("\n 2. Delet");
+    printf("\n 3. Diplay");
+    printf("\n 4. Exit");
+    printf("\n Read choice");
+    scanf("%d",&chr);
+    switch(chr){
+    case 1: printf("\n Read element to be inserted:");
     scanf("%d",&item);
-    push(&s,item);
+    enqueue(&q,item);
     break;
-    case 2: pop(&s);
+    case 2: dequeue(&q);
     break;
-    case 3: display (s);
+    case 3: display(q);
     break;
-    default: exit(0);
+    default:exit(0);
     }
 }
 return 0;
