@@ -1,19 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
-void TowerofHanoi(int n,char source,char dest,char temp){
-if (n>1){
-    TowerofHanoi(n-1,source,temp,dest);
-    printf("\n move %d disc from %c",n,source,dest);
-    TowerofHanoi(n-1,temp,dest,source);
+#define SIZE 5
+ struct stack{;
+int top;
+int data[SIZE]
+};
+typedef struct stack STACK;
+void push(STACK *s,int iteam){
+if(s->top==SIZE-1)
+    printf("\nstack overflow");
+else{s->top=s->top+1;
+s->data[s->top]=iteam;
 }
+}
+void pop(STACK*s){
+if(s->top==-1)
+    printf("\n stack underflow");
 else
-    printf("\n move %d disc from %c",n,source,dest);
+{
+    printf("\n element poped is %d",s->data[s->top]);
+    s->top=s->top-1;
+}
+}
+void display(STACK s){
+int i;
+if(s.top==-1)
+    printf("\n stack is empty");
+else{
+    printf("\n contain of stack");
+    for(i=s.top; i>=0; i--)
+        printf("%d\n",s.data[i]);
+}
 }
 int main(){
-int n;
-printf("\n read number of disc:");
-scanf("%d",&n);
-TowerofHanoi(n,'S','D','T');
+int item,ch;
+STACK s;
+s.top=-1;
+for(;;){
+    printf("\n 1.push");
+    printf("\n 2.pop");
+    printf("\n 3.display");
+    printf("\n 4.exit");
+    printf("\n read choice:");
+    scanf("%d",&ch);
+    switch(ch){
+    case 1: printf("\n read element to be push:");
+    scanf("%d",&item);
+    push(&s,item);
+    break;
+    case 2: pop(&s);
+    break;
+    case 3: display (s);
+    break;
+    default: exit(0);
+    }
+}
 return 0;
 }
 
