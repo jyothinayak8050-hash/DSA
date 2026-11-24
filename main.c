@@ -1,19 +1,67 @@
 #include <stdio.h>
 #include <stdlib.h>
-void TowerofHanoi(int n,char source,char dest,char temp){
-if (n>1){
-    TowerofHanoi(n-1,source,temp,dest);
-    printf("\n move %d disc from %c",n,source,dest);
-    TowerofHanoi(n-1,temp,dest,source);
-}
-else
-    printf("\n move %d disc from %c",n,source,dest);
+void heapify(int a[10],int n){
+    int i,k,v,j,flag=0;
+    for(i=n/2; i>=1; i--)
+    {
+        k=i;
+        v=a[k];
+        while(!flag && 2*k<=n){
+            j=2*k;
+            if(j<n){
+                if(a[j]<a[j+1])
+                    j=j+1;
+            }
+            if(v=a[j])
+                flag=1;
+            else{
+                a[k]=a[j];
+                k=j;
+            }
+        }
+        a[k]=v;
+        flag=0;
+    }
 }
 int main(){
-int n;
-printf("\n read number of disc:");
-scanf("%d",&n);
-TowerofHanoi(n,'S','D','T');
+int n,a[10],i,ch;
+for(;;){
+    printf("\n 1.Create Heap");
+    printf("\n 2.Extractmax");
+    printf("\n 3.Exit");
+    printf("\n Read choice:");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+    case 1:
+        printf("\n Read number of elements:");
+        scanf("%d",&n);
+        printf("\n Read elements\n");
+        for(i=1; i<=n; i++)
+            scanf("%d",&a[i]);
+        heapify(a,n);
+        printf("\n Elements after constucting heap\n");
+        for(i=1; i<=n; i++)
+            printf("%d\t",a[i]);
+        break;
+    case 2:
+        if(n>=1){
+            printf("\n Element delted is %d",a[1]);
+            a[1]=a[n];
+            n=n-1;
+            heapify(a,n);
+            printf("\n Heap after deletion");
+            for(i=1; i<=n; i++)
+                printf("%d\t",a[i]);
+
+        }
+        else
+            printf("\n No element to delete");
+        break;
+        default:exit(0);
+    }
+
+}
 return 0;
 }
 
